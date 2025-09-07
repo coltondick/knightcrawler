@@ -324,6 +324,13 @@ export default function landingTemplate(manifest, config = {}) {
            <input type="text" id="iPutioToken" placeholder="Token" onchange="generateInstallLink()" class="input">
          </div>
 
+         <div id="dTorBox">
+            <label class="label" for="iTorBox">
+               TorBox API Key (find it in your TorBox account):
+            </label>
+            <input type="text" id="iTorBox" onchange="generateInstallLink()" class="input">
+         </div>
+
          <div id="dDebridOptions">
            <label class="label" for="iDebridOptions">Debrid options:</label>
            <select id="iDebridOptions" class="input" onchange="generateInstallLink()" name="debridOptions[]" multiple="multiple">
@@ -404,6 +411,7 @@ export default function landingTemplate(manifest, config = {}) {
             $('#dDebridLink').toggle(provider === '${MochOptions.debridlink.key}');
             $('#dOffcloud').toggle(provider === '${MochOptions.offcloud.key}');
             $('#dPutio').toggle(provider === '${MochOptions.putio.key}');
+            $('#dTorBox').toggle(provider === '${MochOptions.torbox.key}');
           }
 
           function generateInstallLink() {
@@ -421,6 +429,7 @@ export default function landingTemplate(manifest, config = {}) {
               const offcloudValue = $('#iOffcloud').val() || ''
               const putioClientIdValue = $('#iPutioClientId').val() || '';
               const putioTokenValue = $('#iPutioToken').val() || '';
+              const torboxValue = $('#iTorBox').val() || '';
 
               const qualityFilters = qualityFilterValue.length && qualityFilterValue;
               const sort = sortValue !== '${SortOptions.options.qualitySeeders.key}' && sortValue;
@@ -435,6 +444,7 @@ export default function landingTemplate(manifest, config = {}) {
               const debridLink = debridLinkValue.length && debridLinkValue.trim();
               const offcloud = offcloudValue.length && offcloudValue.trim();
               const putio = putioClientIdValue.length && putioTokenValue.length && putioClientIdValue.trim() + '@' + putioTokenValue.trim();
+              const torbox = torboxValue.length && torboxValue.trim();
 
               let configurationValue = [
                     ['${SortOptions.key}', sort],
